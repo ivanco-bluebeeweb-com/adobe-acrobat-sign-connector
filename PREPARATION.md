@@ -1,3 +1,27 @@
-# Adobe Acrobat Sign Connector - PREPARATION.md
+# Adobe Acrobat Sign Connector — Preparation
 
-Standard documentation for Adobe Acrobat Sign Connector in Imperal Cloud.
+**Category:** C34. E-Signature & Digital Agreements  
+**Status:** Canonical App Preparation (APP_PREPARATION_STANDARD.md)  
+**Target API:** https://api.echosign.com/api/rest/v6  
+
+## 1. Паспорт приложения
+- **Название:** Adobe Acrobat Sign Connector
+- **Категория:** C34. E-Signature & Digital Agreements
+- **Официальный сайт:** https://acrobat.adobe.com/us/en/sign.html
+- **Модель доступа:** OAuth 2.0 Bearer Token (Integration Key)
+
+## 2. Человеческая проблема
+Когда юрист сталкивается с задачей подписание юридически значимых документов, отслеживание статуса соглашений и архив электронных подписей, ей приходится вручную переключаться между сервисами, что приводит к задержкам и потере контроля данных.
+
+## 3. Пользователи и роли
+- **юрист:** операционная работа, контроль выполнения сценариев.
+- **Администратор безопасности / ИТ:** управление правами, ротация ключей доступа.
+- **Оператор Imperal Cloud:** автоматизация сценариев через безопасные протоколы ICNLI.
+
+## 4. Первичный сценарий
+`создание соглашения из шаблона -> отправка подписантам -> отслеживание событий подписания через вебхук`.
+
+## 5. Границы и безопасность
+- Никаких синтетических шаблонов от других предметных областей.
+- Использование только принципа Bring Your Own Credentials (BYOC).
+- Маскирование секретов и аудит всех изменений.
