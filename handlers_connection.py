@@ -74,7 +74,7 @@ async def connect_adobe_acrobat_sign(params: ConnectParams, ctx) -> ActionResult
         c["is_active"] = False
     conns.append(record)
     await _save_connections(ctx, conns)
-    return ActionResult.ok(ConnectionRecord(**record), summary=f"Connected to Adobe Acrobat Sign ({record['label']}).")
+    return ActionResult.success(ConnectionRecord(**record), summary=f"Connected to Adobe Acrobat Sign ({record['label']}).")
 
 @chat.function(
     "list_connections",
@@ -88,7 +88,7 @@ async def connect_adobe_acrobat_sign(params: ConnectParams, ctx) -> ActionResult
 async def list_connections(params: NoParams, ctx) -> ActionResult[ConnectionList]:
     conns = await _load_connections(ctx)
     recs = [ConnectionRecord(**c) for c in conns]
-    return ActionResult.ok(ConnectionList(connections=recs, total=len(recs)), summary=f"Found {len(recs)} Adobe Acrobat Sign connection(s).")
+    return ActionResult.success(ConnectionList(connections=recs, total=len(recs)), summary=f"Found {len(recs)} Adobe Acrobat Sign connection(s).")
 
 @chat.function(
     "disconnect_adobe_acrobat_sign",
@@ -102,10 +102,10 @@ async def list_connections(params: NoParams, ctx) -> ActionResult[ConnectionList
 async def disconnect_adobe_acrobat_sign(params: ConnectionIdParams, ctx) -> ActionResult[DeleteResult]:
     conns = await _load_connections(ctx)
     if not conns:
-        return ActionResult.ok(DeleteResult(success=True, message="No active connections to disconnect."), summary="Nothing to disconnect.")
+        return ActionResult.success(DeleteResult(success=True, message="No active connections to disconnect."), summary="Nothing to disconnect.")
     if params.connection_id:
         conns = [c for c in conns if c.get("id") != params.connection_id]
     else:
         conns = []
     await _save_connections(ctx, conns)
-    return ActionResult.ok(DeleteResult(success=True, message="Disconnected Adobe Acrobat Sign."), summary="Disconnected connection.")
+    return ActionResult.success(DeleteResult(success=True, message="Disconnected Adobe Acrobat Sign."), summary="Disconnected connection.")
